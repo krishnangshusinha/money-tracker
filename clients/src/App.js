@@ -7,7 +7,8 @@ const App = () => {
     const [datetime , setDatetime] = useState("");
     const [description , setDescription] = useState("");
     const [transactions , setTransactions] = useState([]);
-
+    const REACT_APP_API_URL = "https://money-tracker-3bwy.onrender.com/api";
+    
     useEffect(()=> {
         getTransactions().then(transactions=> {     // obtaining the list of transactions as a reponse
             setTransactions(transactions);
@@ -15,7 +16,7 @@ const App = () => {
     }, [transactions]);     // onchanging of this dependecy this useEffect hook executes
 
     const getTransactions = async () => {
-        const url = process.env.REACT_APP_API_URL + '/transaction';
+        const url = REACT_APP_API_URL + '/transaction';
 
         const response = await fetch(url);      // fetching the response from the given url
 
@@ -26,7 +27,7 @@ const App = () => {
 
         event.preventDefault();     // preventing default refresh in page on submit of the form
         
-        const url = process.env.REACT_APP_API_URL + '/transaction';     // getting the url defined by us in the ".env" file and adding this extra part to it
+        const url = REACT_APP_API_URL + '/transaction';     // getting the url defined by us in the ".env" file and adding this extra part to it
         const price = name.split(' ')[0];       // extracting the price value from name feild itself (seperated by space, 1st word of name feild is price and second word is the name of device)
         
         fetch(url , {           // this method fetches the url , with these properties as mention.The fetch() method returns a promise which gives us the entire response object with the JSON data, response headers, status code, etc.
